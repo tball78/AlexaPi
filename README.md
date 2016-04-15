@@ -47,24 +47,24 @@ First, you need to obtain a set of credentials from Amazon to use the Alexa Voic
 
 Choose Register a Product Type > Device. Here is an example of what you can do in the setup. Feel free to us my exact setup names, as it doesn't really matter. Just make sure you use the SAME NAME that you create because it matters. That's why it's easiest to keep the same name for everything.
 
-Device Type ID: AlexaPi
-Display Name: AlexaPi
+* Device Type ID: AlexaPi
+* Display Name: AlexaPi
 
 Hit Next. Click on Security Profile -> Create a new profile.
 
-Security Profile Description: AlexaPi
+* Security Profile Description: AlexaPi
 
 Hit Save. It will then create a Security Profile ID , Client ID, and Client Secret for you. These are unique and what will be used to authenticate your device for use with the service. **Make a note of these credentials, you will be asked for them during the install process.**
 
 While under Security Profile, go on the Web Settings tab.
 
 Allowed Origins: 
-http://localhost:5000
-http://IPaddressofyourPi:5000
+* http://localhost:5000
+* http://IPaddressofyourPi:5000
 
 Allowed Return URLs:
-http://localhost:5000/code
-http://IPaddressofyourPi:5000/code
+* http://localhost:5000/code
+* http://IPaddressofyourPi:5000/code
 
 *For some reason, localhost would never work for me, but adding the actual IP of my Pi did. You can add both just to be safe, it won't hurt anything.
 
