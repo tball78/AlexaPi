@@ -9,7 +9,7 @@
  
 This is the code needed to turn a Raspberry Pi into a client for Amazon's Alexa service. I have developed this against the Raspberry Pi 2, but I see no reason why it shouldn't run on the other models. Feedback is welcome! 
 
-There are 2 versions I have built, one with a physical push button on a breadboard, and one using a Wii Remote through bluetooth. Hopefully this is detailed enough to make this project easy enough for intermediate or even beginners. The only expertise needed is how to troubleshoot whenever your situation deviates from the happy path that I present to you (where everything just works).
+There are 2 versions I have built, one with a physical push button on a breadboard, and one using a Wii Remote through bluetooth. Hopefully this is detailed enough to make this project easy enough for intermediate or even beginner level users. The only expertise needed is how to troubleshoot whenever your situation deviates from the happy path that I present to you (where everything just works).
  
 ## Material Requirements
 
@@ -20,11 +20,11 @@ For Both versions:
 * An External Speaker with 3.5mm Jack
 * A USB Sound Dongle and Microphone
 * Power supply for Pi
-* Network connection for Pi (I use a WiFi dongle, although Ethernet can be used instead. Whatever you have available)
-* (Optionally) 2 single LEDs Connected to GPIO 24 & 25 (I use a green led on 24, and a red led on 25. Both have 220ohm resistors [Red, Red, Brown, Gold])
+* Network connection for Pi (I use a WiFi dongle, although Ethernet can be used instead. Whatever you have available.)
+* (Optionally) 2 single LEDs connected to GPIO 24 & 25 (I use a green LED on BCM PIN 24, and a red LED on BCM PIN 25. Both have 220ohm resistors [Red, Red, Brown, Gold])
 
 For Pushbutton version:
-* A pushbutton connected between GPIO 18 and GND (I use a resistor on mine, 1k ohm [Brown, Black, Red, Gold])
+* A pushbutton connected between BCM PIN 18 and GND (I use a resistor on mine, 1k ohm [Brown, Black, Red, Gold])
 * Breadboard and female to male jumper cables
 
 For Wii Remote version:
@@ -111,6 +111,8 @@ Clone this repo to the Pi
 `git clone https://github.com/cwalk/AlexaPi.git`
 
 **THE DEFAULT `main.py` USES THE WII REMOTE. IF YOU WANT TO USE THE PUSHBUTTON, RENAME `main.py` to `mainWiiRemote.py` AND RENAME `mainPushButton.py` TO `main.py` INSTEAD.**
+
+If you are using ethernet instead of WiFi, please change line 31 in `setup.sh` to say "ifconfig eth0" instead of "ifconfig wlan0".
 
 Run the setup script: `./setup.sh`
 
