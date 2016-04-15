@@ -102,15 +102,17 @@ You can test the Wii Remote after you clone the repo, by `cd wii_remote_examples
 Login to a terminal as root. Make sure you are in /root
 
 `sudo su`
+
+and then 
+
 `cd /root`
 
 Clone this repo to the Pi
 `git clone https://github.com/cwalk/AlexaPi.git`
 
-**THE DEFAULT `main.py` USES THE WII REMOTE. IF YOU WANT TO USE THE PUSHBUTTON, RENAME THE `main.py` to `mainWiiRemote.py` AND RENAME `mainPushButton.py` TO `main.py` INSTEAD.**
+**THE DEFAULT `main.py` USES THE WII REMOTE. IF YOU WANT TO USE THE PUSHBUTTON, RENAME `main.py` to `mainWiiRemote.py` AND RENAME `mainPushButton.py` TO `main.py` INSTEAD.**
 
-Run the setup script
-`./setup.sh`
+Run the setup script: `./setup.sh`
 
 Follow instructions....you will need to copy and paste your Device Type ID, Security Profile Description, Security Profile ID , Client ID, and Client Secret. If you followed the instructions exactly above, Device Type ID and Security Profile Description would both be 'AlexaPi'. The rest is unique to your device.
 
@@ -131,7 +133,7 @@ The circuit diagram provided below works as follows:
 
 -A red LED has a wire from GND to one leg of a 220ohm resistor. The other leg of the resistor connects to the 1st leg of the LED. The 2nd leg of the LED is wired to BCM PIN 25.
 
-There are 2 types of GPIO readings. BCM and BOARD. BCM uses a specific number, while BOARD uses the actual physical pin number. *This python script uses BCM, so don't use the BOARD layout!* Here is a link to the GPIO on the Raspberry Pi: https://pinout.xyz
+There are 2 types of GPIO readings. BCM and BOARD. BCM uses a specific number, while BOARD uses the actual physical pin number. **This python script uses BCM, so don't use the BOARD layout!** Here is a link to the GPIO on the Raspberry Pi: https://pinout.xyz
 
 
 
