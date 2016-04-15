@@ -83,7 +83,7 @@ I personally hit NO for the Amazon Music. If you choose YES and have issues, I w
 
 # Raspberry Pi Setup
 
-Now that you have signed up for the Alexa Service, go ahead and boot up your Pi. Make sure you have internet connection. Feel free to expand the filesystem, change the timezone, etc. under `sudo raspi-config`. While under hear, I went to advanced settings, audio, and forced 3.5mm jack for the speaker. You can use HDMI for the audio, but I went with a speaker. I also go ahead and set my microphone as the default through audio settings.
+Now that you have signed up for the Alexa Service, go ahead and boot up your Pi. Make sure you have internet connection. Feel free to expand the filesystem, change the timezone, etc. under `sudo raspi-config`. While under here, I went to advanced settings, audio, and forced 3.5mm jack output for the speaker. You can use HDMI for the audio, but I went with a speaker. I also go ahead and set my microphone as the default through audio settings.
 
 ## Bluetooth Setup
 
@@ -96,8 +96,8 @@ Check the status with `sudo service bluetooth status` to make sure everything is
 Now install the module you will need to use the Wii Remote: `sudo apt-get install python-cwiid`
 
 You can test the Wii Remote after you clone the repo, by `cd wii_remote_examples/` and running one of the scripts.
-`python wii_remote.py` just tests the button presses. Connect by pressing 1 and 2 at the same time.
-`python wiimote.py` is a little more advanced, but basically works the same. The player 1 LED will light up when you are successfully connected, and you can even view the Wii mote accelerometer data if you hold down the home button.
+* `python wii_remote.py` just tests the button presses. Connect by pressing 1 and 2 at the same time.
+* `python wiimote.py` is a little more advanced, but basically works the same. The player 1 LED will light up when you are successfully connected, and you can even view the Wii mote accelerometer data if you hold down the home button.
 
 ## Code Installation
 
