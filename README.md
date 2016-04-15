@@ -107,6 +107,8 @@ Login to a terminal as root. Make sure you are in /root
 Clone this repo to the Pi
 `git clone https://github.com/cwalk/AlexaPi.git`
 
+*THE DEFAULT `main.py` USES THE WII REMOTE. IF YOU WANT TO USE THE PUSHBUTTON, RENAME THE `mainPushButton.py` TO `main.py` AND RENAME THE OTHER TO `mainWiiRemote.py` INSTEAD.*
+
 Run the setup script
 `./setup.sh`
 
