@@ -11,12 +11,13 @@ from creds import *
 import requests
 import json
 import re
+import cwiid
 from memcache import Client
 
 #Settings
 button = 18 #GPIO Pin with button connected
 lights = [24, 25] # GPIO Pins with LED's conneted
-device = "plughw:1" # Name of your microphone/soundcard in arecord -L
+device = "sysdefault:CARD=Snowball" # Name of your microphone/soundcard in arecord -L
 
 #Setup
 recorded = False
@@ -51,7 +52,34 @@ def gettoken():
 		return resp['access_token']
 	else:
 		return False
-		
+
+def connect_wiimote():
+	connected = False
+	while connected == False:
+		try:
+			wii=cwiid.Wiimote()
+			wii.led = 1
+			connected = True
+		except RuntimeError:
+			print "Error opening wiimote connection"
+			time.sleep(10)
+			connected=False
+	wii.rpt_mode = cwiid.RPT_BTN
+	return wii
+
+def rumble(wii, kind='once'):
+	if kind == 'once':
+		wii.rumble = 1
+		time.sleep(0.5)
+		wii.rumble = 0
+	if kind =='twice':
+		wii.rumble = 1
+		time.sleep(0.2)
+		wii.rumble = 0
+		time.sleep(0.2)
+		wii.rumble = 1
+		time.sleep(0.2)
+		wii.rumble = 0	
 
 def alexa():
 	GPIO.output(24, GPIO.HIGH)
@@ -107,10 +135,20 @@ def alexa():
 
 
 
-def start():
-	last = GPIO.input(button)
+def start(wii):
+	#last = GPIO.input(button)
+	buttons = wii.state['buttons']
+    	if (buttons & cwiid.BTN_A):
+        	last = 0
+    	else:
+        	last = 1
 	while True:
-		val = GPIO.input(button)
+		buttons = wii.state['buttons']
+		if (buttons & cwiid.BTN_A):
+            		val = 0
+        	else:
+            		val = 1
+		#val = GPIO.input(button)
 		if val != last:
 			last = val
 			if val == 1 and recorded == True:
@@ -135,7 +173,15 @@ def start():
 			l, data = inp.read()
 			if l:
 				audio += data
-	
+		# ----------------------------------------
+        	# If Plus and Minus buttons pressed
+        	# together then rumble and quit.
+        	if (buttons - cwiid.BTN_PLUS - cwiid.BTN_MINUS == 0):  
+            		print '\nClosing connection ...'
+            		rumble(wii,'twice')
+            		wii.close()
+            		# Wait for reconnect
+            		wii = connect_wiimote()	
 
 if __name__ == "__main__":
 	GPIO.setwarnings(False)
@@ -153,4 +199,5 @@ if __name__ == "__main__":
 		GPIO.output(24, GPIO.HIGH)
 		time.sleep(.1)
 		GPIO.output(24, GPIO.LOW)
-	start()
+	wii = connect_wiimote()
+	start(wii)
