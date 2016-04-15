@@ -116,6 +116,8 @@ Clone this repo to the Pi
 
 **If you are using ethernet instead of WiFi, please change line 31 in `setup.sh` to say "ifconfig eth0" instead of "ifconfig wlan0".**
 
+**You must change line that starts with `device = "sysdefault:CARD=Snowball"` and replace it with the name of your microphone/soundcard. You can find this in `arecord -L`**
+
 Run the setup script: `./setup.sh`
 
 Follow instructions....you will need to copy and paste your Device Type ID, Security Profile Description, Security Profile ID, Client ID, and Client Secret. If you followed the instructions exactly above, Device Type ID and Security Profile Description would both be 'AlexaPi'. The rest is unique to your device.
