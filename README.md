@@ -112,9 +112,9 @@ and then
 Clone this repo to the Pi
 `git clone https://github.com/cwalk/AlexaPi.git`
 
-**THE DEFAULT `main.py` USES THE WII REMOTE. IF YOU WANT TO USE THE PUSHBUTTON, RENAME `main.py` to `mainWiiRemote.py` AND RENAME `mainPushButton.py` TO `main.py` INSTEAD.
+**THE DEFAULT `main.py` USES THE WII REMOTE. IF YOU WANT TO USE THE PUSHBUTTON, RENAME `main.py` to `mainWiiRemote.py` AND RENAME `mainPushButton.py` TO `main.py` INSTEAD.**
 
-If you are using ethernet instead of WiFi, please change line 31 in `setup.sh` to say "ifconfig eth0" instead of "ifconfig wlan0".**
+**If you are using ethernet instead of WiFi, please change line 31 in `setup.sh` to say "ifconfig eth0" instead of "ifconfig wlan0".**
 
 Run the setup script: `./setup.sh`
 
