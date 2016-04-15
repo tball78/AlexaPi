@@ -2,24 +2,38 @@
  
 ---
  
-### Contributors
+## Contributors
  
+* Clayton Walker 
 * Sam Machin
  
----
+## Introduction
  
-This is the code needed to Turn a Raspberry Pi into a client for Amazon's Alexa service, I have developed this against the Pi 2 but I see no reason it shouldn't run on the other models. Feedback welcome.
----
+This is the code needed to Turn a Raspberry Pi into a client for Amazon's Alexa service. I have developed this against the Pi 2, but I see no reason it shouldn't run on the other models. Feedback welcome. There are 2 versions I have built, one with a physical push button on a breadboard, and one using a Wii Remote through bluetooth.
  
-### Requirements
+## Requirements
 
-You will need:
-* A Raspberry Pi
-* An SD Card with a fresh install of Raspbian (tested against build 2015-11-21 Jessie)
+For Both:
+
+* A Raspberry Pi (I use the Raspberry Pi 2 B)
+* An SD Card with a fresh install of Raspbian (tested against build 2015-11-21 Jessie. I use a 16GB, although 8GB will be plenty)
 * An External Speaker with 3.5mm Jack
 * A USB Sound Dongle and Microphone
-* A push to make button connected between GPIO 18 and GND
-* (Optionally) A Dual colour LED (or 2 signle LEDs) Connected to GPIO 24 & 25
+* Power supply for Pi
+* Network connection for Pi (I use a WiFi dongle, although Ethernet can be used instead. Whatever you have available)
+* (Optionally) 2 single LEDs Connected to GPIO 24 & 25 (I use a red led on 24, and a green led on 25. Both have 220ohm resistors [Red, Red, Brown, Gold])
+
+For Pushbutton version:
+* A pushbutton connected between GPIO 18 and GND (I use a resistor on mine, 1k ohm [Brown, Black, Red, Gold])
+* Breadboard and female to male jumper cables
+
+For Wii Remote version:
+* Bluetooth dongle (I used a UD100-G03 Bluetooth adapter from Sena, which uses BlueSoleil Bluetooth Software. Literally almost any bluetooth adapter should work, including the built in Raspberry Pi 3 bluetooth [I tried and it works with mine])
+* Wii Remote (I use the original version from 2006. I'm sure it would work exactly the same with the newer "motion plus" versions)
+
+## Overview
+
+Basically 
 
 
 Next you need to obtain a set of credentials from Amazon to use the Alexa Voice service, login at http://developer.amazon.com and Goto Alexa then Alexa Voice Service
