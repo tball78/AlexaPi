@@ -116,7 +116,7 @@ Clone this repo to the Pi
 
 **If you are using ethernet instead of WiFi, please change line 31 in `setup.sh` to say "ifconfig eth0" instead of "ifconfig wlan0".**
 
-**You must change line that starts with `device = "sysdefault:CARD=Snowball"` and replace it with the name of your microphone/soundcard. You can find this in `arecord -L`**
+**In `main.py` you must change the line that starts with `device = "sysdefault:CARD=Snowball"` and replace it with the name of your microphone/soundcard. You can find this in `arecord -L`**
 
 Run the setup script: `./setup.sh`
 
