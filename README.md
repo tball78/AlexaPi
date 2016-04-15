@@ -37,7 +37,7 @@ Basically what we will be doing, is signing up to the Amazon developer program, 
 
 After the set up is complete, you will be able to press and hold a button, ask Alexa a question, and release the button. When the button is released, your recording is sent to Alexa and she sends back the response, which is played through your Pi's speaker. This is all done in `main.py`, which will start up automatically when you apply power to the Pi on every reboot after the set up is complete. 
 
-If you are doing the Wii remote version, I have also made it so the script is constantly looking for a Wii remote connection whenever there isn't one established, so you should'nt need a GUI or ssh into the Pi after everthing is set up. This means even if you need to replace the batteries on the Wii remote, you can still just reconnect the remote and it works, without having to touch the Pi or code at all.
+If you are doing the Wii remote version, I have also made it so the script is constantly looking for a Wii remote connection whenever there isn't one established, so you shouldn't need a GUI or ssh into the Pi after everthing is set up. This means even if you need to replace the batteries on the Wii remote, you can still just reconnect the remote and it works, without having to touch the Pi or code at all.
 
 # Setup
 
