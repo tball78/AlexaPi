@@ -21,7 +21,7 @@ For Both versions:
 * A USB Sound Dongle and Microphone
 * Power supply for Pi
 * Network connection for Pi (I use a WiFi dongle, although Ethernet can be used instead. Whatever you have available)
-* (Optionally) 2 single LEDs Connected to GPIO 24 & 25 (I use a red led on 24, and a green led on 25. Both have 220ohm resistors [Red, Red, Brown, Gold])
+* (Optionally) 2 single LEDs Connected to GPIO 24 & 25 (I use a green led on 24, and a red led on 25. Both have 220ohm resistors [Red, Red, Brown, Gold])
 
 For Pushbutton version:
 * A pushbutton connected between GPIO 18 and GND (I use a resistor on mine, 1k ohm [Brown, Black, Red, Gold])
@@ -83,7 +83,7 @@ I personally hit NO for the Amazon Music. If you choose YES and have issues, I w
 
 # Raspberry Pi Setup
 
-Now that you have signed up for the Alexa Service, go ahead and boot up your Pi. Make sure you have internet connection. Feel free to expand the filesystem, change the timezone, etc. under `sudo raspi-config`. While under hear, I went to advanced settings, audio, and forced 3.5mm jack for the speaker. You can use HDMI for the audio, but I went with a speaker.
+Now that you have signed up for the Alexa Service, go ahead and boot up your Pi. Make sure you have internet connection. Feel free to expand the filesystem, change the timezone, etc. under `sudo raspi-config`. While under hear, I went to advanced settings, audio, and forced 3.5mm jack for the speaker. You can use HDMI for the audio, but I went with a speaker. I also go ahead and set my microphone as the default through audio settings.
 
 ## Bluetooth Setup
 
@@ -125,19 +125,23 @@ If you only want to use the Wii remote, you can skip this part. For those of you
 The circuit diagram provided below works as follows:
 -A push button is wired between GND and BCM Pin 18. So a wire goes from GND on the Pi, to a 1k ohm resistor on the bread board. The other leg of the resistor is with the first leg of the push button. The second leg of the pushbutton is wired to Pin 18.
 
--A red LED has a wire from GND to one leg of a 220ohm resistor. The other leg of the resistor connects to the 1st leg of the LED. The 2nd leg of the LED is wired to BCM PIN 24.
+-A green LED has a wire from GND to one leg of a 220ohm resistor. The other leg of the resistor connects to the 1st leg of the LED. The 2nd leg of the LED is wired to BCM PIN 24.
 
--A green LED has a wire from GND to one leg of a 220ohm resistor. The other leg of the resistor connects to the 1st leg of the LED. The 2nd leg of the LED is wired to BCM PIN 25.
+-A red LED has a wire from GND to one leg of a 220ohm resistor. The other leg of the resistor connects to the 1st leg of the LED. The 2nd leg of the LED is wired to BCM PIN 25.
 
 There are 2 types of GPIO readings. BCM and BOARD. BCM uses a specific number, while BOARD uses the actual physical pin number. *This python script uses BCM, so don't use the BOARD layout!* Here is a link to the GPIO on the Raspberry Pi: https://pinout.xyz
 
+
+
 # Usage
 
-After you set up everything above, you can finally apply power to your Pi. You should hear Alexa say 'Hello', which means `main.py` is successfully running on reboot. If you decided to wire up the optional LEDs, the red LED will blink 3 times when Alexa is ready to be asked questions.
+After you set up everything above, you can finally apply power to your Pi. You should hear Alexa say 'Hello', which means `main.py` is successfully running on reboot. If you decided to wire up the optional LEDs, the green LED will blink 3 times when Alexa is ready to be asked questions.
 
 To connect your Wii remote, hold the 1 and 2 buttons at the same time for a couple seconds, and let go. If it connects successfully, you should see the Player 1 LED light up.
 
-Here is the process if you wired up the optional LEDs. You press a button (pushbutton, or A button on Wii remote) and the green LED turns on. Hold your button, ask your question, and let go of the button. When you let go of the button, the red LED should come on. This lets us know we captured your recording, and it's being sent to Alexa. The green LED should turn off when it's finished processing. Then Alexa will speak her response through the speaker. The red LED will turn off when she is done speaking, and you are free to ask another question.
+Here is the process if you wired up the optional LEDs. You press a button (pushbutton, or A button on Wii remote) and the red LED turns on. Hold your button, ask your question, and let go of the button. When you let go of the button, the green LED should come on. This lets us know we captured your recording, and it's being sent to Alexa. The red LED should turn off when it's finished processing. Then Alexa will speak her response through the speaker. The green LED will turn off when she is done speaking, and you are free to ask another question. 
+
+If the client gets an error back from AVS, then the Red LED will flash 3 times. This usually means something went wrong (is your pushbutton snug in the breadboard? Mine popped out once or twice during recording, causing this to happen).
 
 In case you don't know much about Alexa, here is a good resource for how to talk to her: https://www.amazon.com/gp/help/customer/display.html?nodeId=201549800
 
@@ -145,13 +149,12 @@ In case you don't know much about Alexa, here is a good resource for how to talk
 
 If your alexa isn't running on startup you can check /var/log/alexa.log for errrors.
 
-If the error is complaining about alsaaudio you may need to check the name of your soundcard input device, use 
-`arecord -L` 
+Check to see if the python service is running by typing this command in the terminal: `ps aux | grep python`
 
-The device name can be set in the settings at the top of main.py 
+If there is an error complaining about alsaaudio you may need to check the name of your soundcard input device, use 
+`arecord -L`. The device name can be set in the settings at the top of `main.py`, under the device variable.
 
-You may need to adjust the volume and/or input gain for the microphone, you can do this with 
-`alsamixer`
+You may need to adjust the volume and/or input gain for the microphone, you can do this with `alsamixer`.
 
 ### Advanced Install
 
@@ -161,9 +164,9 @@ The Amazon AVS credentials are stored in a file called creds.py which is used by
 
 The auth_web.py is a simple web server to generate the refresh token via oAuth to the amazon users account, it then appends this to creds.py and displays it on the browser.
 
-main.py is the 'main' alexa client it simply runs on a while True loop waiting for the button to be pressed, it then records audio and when the button is released it posts this to the AVS service using the requests library, When the response comes back it is played back using mpg123 via an os system call, The 1sec.mp3 file is a 1second silent MP3) I found that my soundcard/pi was clipping the beginning of audio files and i was missing the first bit of the response so this is there to pad the audio.
+main.py is the 'main' alexa client it simply runs on a while True loop waiting for the button to be pressed, it then records audio and when the button is released it posts this to the AVS service using the requests library, When the response comes back it is played back using mpg123 via an os system call (The 1sec.mp3 file is a 1second silent MP3. I found that my soundcard/pi was clipping the beginning of audio files and I was missing the first bit of the response so this is there to pad the audio).
 
-The LED's are a visual indictor of status, I used a duel Red/Green LED but you could also use separate LEDS, Red is connected to GPIO 24 and green to GPIO 25, When recording the RED LED will be lit when the file is being posted and waiting for the response both LED's are lit (or in the case of a dual R?G LED it goes Yellow) and when the response is played only the Green LED is lit. If The client gets an error back from AVS then the Red LED will flash 3 times.
+The LED's are a visual indictor of status, I used separate LEDS. Green is connected to BCM GPIO 24 and red to BCM GPIO 25. When recording the RED LED will be lit. When the file is being posted and waiting for the response, both LED's are lit. When the response is played, only the Green LED is lit. If the client gets an error back from AVS, then the Red LED will flash 3 times.
 
 The internet_on() routine is testing the connection to the Amazon auth server as I found that running the script on boot it was failing due to the network not being fully established so this will keep it retrying until it can make contact before getting the auth token.
 
