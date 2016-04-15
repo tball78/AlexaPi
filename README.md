@@ -71,11 +71,11 @@ Allowed Return URLs:
 Hit Save.
 
 Device Details:
--You don't need an image
--Category: Other
--Description: AlexaPi
--Expected timeline: Longer than 4 months/TBD
--Devices planned for commercialization: 0
+* You don't need an image
+* Category: Other
+* Description: AlexaPi
+* Expected timeline: Longer than 4 months/TBD
+* Devices planned for commercialization: 0
 
 Hit Next
 
