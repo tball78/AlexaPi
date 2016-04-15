@@ -112,13 +112,13 @@ and then
 Clone this repo to the Pi
 `git clone https://github.com/cwalk/AlexaPi.git`
 
-**THE DEFAULT `main.py` USES THE WII REMOTE. IF YOU WANT TO USE THE PUSHBUTTON, RENAME `main.py` to `mainWiiRemote.py` AND RENAME `mainPushButton.py` TO `main.py` INSTEAD.**
+**THE DEFAULT `main.py` USES THE WII REMOTE. IF YOU WANT TO USE THE PUSHBUTTON, RENAME `main.py` to `mainWiiRemote.py` AND RENAME `mainPushButton.py` TO `main.py` INSTEAD.
 
-If you are using ethernet instead of WiFi, please change line 31 in `setup.sh` to say "ifconfig eth0" instead of "ifconfig wlan0".
+If you are using ethernet instead of WiFi, please change line 31 in `setup.sh` to say "ifconfig eth0" instead of "ifconfig wlan0".**
 
 Run the setup script: `./setup.sh`
 
-Follow instructions....you will need to copy and paste your Device Type ID, Security Profile Description, Security Profile ID , Client ID, and Client Secret. If you followed the instructions exactly above, Device Type ID and Security Profile Description would both be 'AlexaPi'. The rest is unique to your device.
+Follow instructions....you will need to copy and paste your Device Type ID, Security Profile Description, Security Profile ID, Client ID, and Client Secret. If you followed the instructions exactly above, Device Type ID and Security Profile Description would both be 'AlexaPi'. The rest is unique to your device.
 
 After the setup script finished running, you will need to open a browser to http://IPaddressofyourPi:5000
 
