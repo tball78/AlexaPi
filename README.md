@@ -1,7 +1,5 @@
 # AlexaPi
- 
----
- 
+
 ## Contributors
  
 * Clayton Walker 
@@ -9,11 +7,13 @@
  
 ## Introduction
  
-This is the code needed to Turn a Raspberry Pi into a client for Amazon's Alexa service. I have developed this against the Pi 2, but I see no reason it shouldn't run on the other models. Feedback welcome. There are 2 versions I have built, one with a physical push button on a breadboard, and one using a Wii Remote through bluetooth.
- 
-## Requirements
+This is the code needed to turn a Raspberry Pi into a client for Amazon's Alexa service. I have developed this against the Raspberry Pi 2, but I see no reason why it shouldn't run on the other models. Feedback is welcome! 
 
-For Both:
+There are 2 versions I have built, one with a physical push button on a breadboard, and one using a Wii Remote through bluetooth. Hopefully this is detailed enough to make this project easy enough for intermediate or even beginners. The only expertise needed is how to troubleshoot whenever your situation deviates from the happy path that I present to you (where everything just works).
+ 
+## Material Requirements
+
+For Both versions:
 
 * A Raspberry Pi (I use the Raspberry Pi 2 B)
 * An SD Card with a fresh install of Raspbian (tested against build 2015-11-21 Jessie. I use a 16GB, although 8GB will be plenty)
@@ -33,11 +33,19 @@ For Wii Remote version:
 
 ## Overview
 
-Basically 
+Basically what we will be doing, is signing up to the Amazon developer program, and registering a device to use the Alexa Voice Service. We will then take a Raspberry Pi, and connect some sort of physical button to it, a microphone, and a speaker. When you run the setup script included in this repo, you will download everything needed (at least this was the case off a fresh build of 2015-11-21 Jessie).
 
+After the set up is complete, you will be able to press and hold a button, ask Alexa a question, and release the button. When the button is released, your recording is sent to Alexa and she sends back the response, which is played through your Pi's speaker. This is all done in `main.py`, which will start up automatically when you apply power to the Pi on every reboot after the set up is complete. 
 
-Next you need to obtain a set of credentials from Amazon to use the Alexa Voice service, login at http://developer.amazon.com and Goto Alexa then Alexa Voice Service
-You need to create a new product type as a Device, for the ID use something like AlexaPi, create a new security profile and under the web settings allowed origins put http://localhost:5000 and as a return URL put http://localhost:5000/code you can also create URLs replacing localhost with the IP of your Pi  eg http://192.168.1.123:5000
+If you are doing the Wii remote version, I have also made it so the script is constantly looking for a Wii remote connection whenever there isn't one established, so you should'nt need a GUI or ssh into the Pi after everthing is set up. This means even if you need to replace the batteries on the Wii remote, you can still just reconnect the remote and it works, without having to touch the Pi or code at all.
+
+# Setup
+
+## Amazon Developer
+
+First, you need to obtain a set of credentials from Amazon to use the Alexa Voice service. Login at http://developer.amazon.com and go to Alexa, then Alexa Voice Service. 
+
+You need to create a new product type as a Device. For the ID use something like AlexaPi. create a new security profile and under the web settings allowed origins put http://localhost:5000 and as a return URL put http://localhost:5000/code you can also create URLs replacing localhost with the IP of your Pi  eg http://192.168.1.123:5000
 Make a note of these credentials you will be asked for them during the install process
 
 ### Installation
