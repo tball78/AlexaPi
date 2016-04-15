@@ -43,19 +43,68 @@ If you are doing the Wii remote version, I have also made it so the script is co
 
 ## Amazon Developer
 
-First, you need to obtain a set of credentials from Amazon to use the Alexa Voice service. Login at http://developer.amazon.com and go to Alexa, then Alexa Voice Service. 
+First, you need to obtain a set of credentials from Amazon to use the Alexa Voice service. Login at http://developer.amazon.com and go to Apps and Services, then Alexa, then Alexa Voice Service (Get Started). 
 
-You need to create a new product type as a Device. For the ID use something like AlexaPi. create a new security profile and under the web settings allowed origins put http://localhost:5000 and as a return URL put http://localhost:5000/code you can also create URLs replacing localhost with the IP of your Pi  eg http://192.168.1.123:5000
-Make a note of these credentials you will be asked for them during the install process
+Choose Register a Product Type > Device. Here is an example of what you can do in the setup. Feel free to us my exact setup names, as it doesn't really matter. Just make sure you use the SAME NAME that you create because it matters. That's why it's easiest to keep the same name for everything.
 
-### Installation
+Device Type ID: AlexaPi
+Display Name: AlexaPi
 
-Boot your fresh Pi and login to a command prompt as root.
+Hit Next. Click on Security Profile -> Create a new profile.
 
-Make sure you are in /root
+Security Profile Description: AlexaPi
+
+Hit Save. It will then create a Security Profile ID , Client ID, and Client Secret for you. These are unique and what will be used to authenticate your device for use with the service. *Make a note of these credentials, you will be asked for them during the install process.*
+
+While under Security Profile, go on the Web Settings tab.
+
+Allowed Origins: 
+http://localhost:5000
+http://IPaddressofyourPi:5000
+
+Allowed Return URLs:
+http://localhost:5000/code
+http://IPaddressofyourPi:5000/code
+
+*For some reason, localhost would never work for me, but adding the actual IP of my Pi did. You can add both just to be safe, it won't hurt anything.
+
+Hit Save.
+
+Device Details:
+-You don't need an image
+-Category: Other
+-Description: AlexaPi
+-Expected timeline: Longer than 4 months/TBD
+-Devices planned for commercialization: 0
+
+Hit Next
+
+I personally hit NO for the Amazon Music. If you choose YES and have issues, I would not be an expert on what's going on.
+
+# Raspberry Pi Setup
+
+Now that you have signed up for the Alexa Service, go ahead and boot up your Pi. Make sure you have internet connection. Feel free to expand the filesystem, change the timezone, etc. under `sudo raspi-config`. While under hear, I went to advanced settings, audio, and forced 3.5mm jack for the speaker. You can use HDMI for the audio, but I went with a speaker.
+
+## Bluetooth Setup
+
+Next, go ahead and install bluetooth, even if you aren't going to be doing the Wii remote version. In case you change your mind later, this saves time.
+
+`sudo apt-get install --no-install-recommends bluetooth`
+
+Check the status with `sudo service bluetooth status` to make sure everything is working properly.
+
+You can test the Wii Remote after you clone the repo, by `cd `
+
+## Code Installation
+
+Login to a command prompt as root. Make sure you are in /root
+
+`sudo su`
+`cd /root`
 
 Clone this repo to the Pi
 `git clone https://github.com/sammachin/AlexaPi.git`
+
 Run the setup script
 `./setup.sh`
 
@@ -69,6 +118,7 @@ If your alexa isn't running on startup you can check /var/log/alexa.log for errr
 
 If the error is complaining about alsaaudio you may need to check the name of your soundcard input device, use 
 `arecord -L` 
+
 The device name can be set in the settings at the top of main.py 
 
 You may need to adjust the volume and/or input gain for the microphone, you can do this with 
@@ -89,14 +139,3 @@ The LED's are a visual indictor of status, I used a duel Red/Green LED but you c
 The internet_on() routine is testing the connection to the Amazon auth server as I found that running the script on boot it was failing due to the network not being fully established so this will keep it retrying until it can make contact before getting the auth token.
 
 The auth token is generated from the request_token the auth_token is then stored in a local memcache with and expiry of just under an hour to align with the validity at Amazon, if the function fails to get an access_token from memcache it will then request a new one from Amazon using the refresh token.
-
-
-
-
-
-
-
-
----
- 
-
