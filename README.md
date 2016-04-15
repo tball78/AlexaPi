@@ -43,7 +43,7 @@ If you are doing the Wii remote version, I have also made it so the script is co
 
 ## Amazon Developer
 
-First, you need to obtain a set of credentials from Amazon to use the Alexa Voice service. Login at http://developer.amazon.com and go to Apps and Services, then Alexa, then Alexa Voice Service (Get Started). 
+First, you need to obtain a set of credentials from Amazon to use the Alexa Voice service. Sign Up/Login at http://developer.amazon.com and go to Apps and Services, then Alexa, then Alexa Voice Service (Get Started). 
 
 Choose Register a Product Type > Device. Here is an example of what you can do in the setup. Feel free to us my exact setup names, as it doesn't really matter. Just make sure you use the SAME NAME that you create because it matters. That's why it's easiest to keep the same name for everything.
 
