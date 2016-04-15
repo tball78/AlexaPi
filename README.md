@@ -54,7 +54,7 @@ Hit Next. Click on Security Profile -> Create a new profile.
 
 Security Profile Description: AlexaPi
 
-Hit Save. It will then create a Security Profile ID , Client ID, and Client Secret for you. These are unique and what will be used to authenticate your device for use with the service. *Make a note of these credentials, you will be asked for them during the install process.*
+Hit Save. It will then create a Security Profile ID , Client ID, and Client Secret for you. These are unique and what will be used to authenticate your device for use with the service. **Make a note of these credentials, you will be asked for them during the install process.**
 
 While under Security Profile, go on the Web Settings tab.
 
@@ -107,7 +107,7 @@ Login to a terminal as root. Make sure you are in /root
 Clone this repo to the Pi
 `git clone https://github.com/cwalk/AlexaPi.git`
 
-*THE DEFAULT `main.py` USES THE WII REMOTE. IF YOU WANT TO USE THE PUSHBUTTON, RENAME THE `mainPushButton.py` TO `main.py` AND RENAME THE OTHER TO `mainWiiRemote.py` INSTEAD.*
+**THE DEFAULT `main.py` USES THE WII REMOTE. IF YOU WANT TO USE THE PUSHBUTTON, RENAME THE `main.py` to `mainWiiRemote.py` AND RENAME `mainPushButton.py` TO `main.py` INSTEAD.**
 
 Run the setup script
 `./setup.sh`
