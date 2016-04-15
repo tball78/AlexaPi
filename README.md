@@ -139,7 +139,7 @@ The circuit diagram provided below works as follows:
 
 There are 2 types of GPIO readings. BCM and BOARD. BCM uses a specific number, while BOARD uses the actual physical pin number. **This python script uses BCM, so don't use the BOARD layout!** Here is a link to the GPIO on the Raspberry Pi: https://pinout.xyz
 
-
+![Circuit Diagram](/Circuit.png?raw=true "Circuit Diagram")
 
 # Usage
 
