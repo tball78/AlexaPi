@@ -120,11 +120,11 @@ Run the setup script: `./setup.sh`
 
 Follow instructions....you will need to copy and paste your Device Type ID, Security Profile Description, Security Profile ID, Client ID, and Client Secret. If you followed the instructions exactly above, Device Type ID and Security Profile Description would both be 'AlexaPi'. The rest is unique to your device.
 
-After the setup script finished running, you will need to open a browser to http://IPaddressofyourPi:5000
+After the setup script finishes running, you will need to open a browser to http://IPaddressofyourPi:5000
 
-This will take you to the Amazon Developer login scree. Login with your account credentials, and agree that this is your device. Then an authentication token will be displayed in the browser. The setup script automatically takes this token, and appends it to your cred.py file, so you dont need to do anything else. Close the browser.
+This will take you to the Amazon Developer login screen. Login with your account credentials, and agree that this is your device. Then an authentication token will be displayed in the browser. The setup script automatically takes this token, and appends it to your cred.py file, so you dont need to do anything else. Close the browser.
 
-You can now quit out of the setup with Control + C. You should be able to test the code with `python main.py` and hear Alexa say 'Hello'. Feel free to close the terminal, and shutdown your Pi.
+Let the script re-run after it takes in the token. When it looks like it's not doing anything else, you can now quit out of the setup with Control + C. You should be able to test the code with `python main.py` and hear Alexa say 'Hello'. Feel free to close the terminal, and shutdown your Pi.
 
 ## Circuit Setup
 
