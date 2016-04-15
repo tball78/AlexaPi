@@ -131,11 +131,11 @@ Let the script re-run after it takes in the token. When it looks like it's not d
 If you only want to use the Wii remote, you can skip this part. For those of you wanting to use a pushbutton on a breadboard, OR wanting the optional LEDS, listen up.
 
 The circuit diagram provided below works as follows:
--A push button is wired between GND and BCM Pin 18. So a wire goes from GND on the Pi, to a 1k ohm resistor on the bread board. The other leg of the resistor is with the first leg of the push button. The second leg of the pushbutton is wired to Pin 18.
+* A push button is wired between GND and BCM Pin 18. So a wire goes from GND on the Pi, to a 1k ohm resistor on the bread board. The other leg of the resistor is with the first leg of the push button. The second leg of the pushbutton is wired to Pin 18.
 
--A green LED has a wire from GND to one leg of a 220ohm resistor. The other leg of the resistor connects to the 1st leg of the LED. The 2nd leg of the LED is wired to BCM PIN 24.
+* A green LED has a wire from GND to one leg of a 220ohm resistor. The other leg of the resistor connects to the 1st leg of the LED. The 2nd leg of the LED is wired to BCM PIN 24.
 
--A red LED has a wire from GND to one leg of a 220ohm resistor. The other leg of the resistor connects to the 1st leg of the LED. The 2nd leg of the LED is wired to BCM PIN 25.
+* A red LED has a wire from GND to one leg of a 220ohm resistor. The other leg of the resistor connects to the 1st leg of the LED. The 2nd leg of the LED is wired to BCM PIN 25.
 
 There are 2 types of GPIO readings. BCM and BOARD. BCM uses a specific number, while BOARD uses the actual physical pin number. **This python script uses BCM, so don't use the BOARD layout!** Here is a link to the GPIO on the Raspberry Pi: https://pinout.xyz
 
