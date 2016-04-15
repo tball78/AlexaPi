@@ -93,24 +93,53 @@ Next, go ahead and install bluetooth, even if you aren't going to be doing the W
 
 Check the status with `sudo service bluetooth status` to make sure everything is working properly.
 
-You can test the Wii Remote after you clone the repo, by `cd `
+You can test the Wii Remote after you clone the repo, by `cd wii_remote_examples/` and running one of the scripts.
+`python wii_remote.py` just tests the button presses. Connect by pressing 1 and 2 at the same time.
+`python wiimote.py` is a little more advanced, but basically works the same. The player 1 LED will light up when you are successfully connected, and you can even view the Wii mote accelerometer data if you hold down the home button.
 
 ## Code Installation
 
-Login to a command prompt as root. Make sure you are in /root
+Login to a terminal as root. Make sure you are in /root
 
 `sudo su`
 `cd /root`
 
 Clone this repo to the Pi
-`git clone https://github.com/sammachin/AlexaPi.git`
+`git clone https://github.com/cwalk/AlexaPi.git`
 
 Run the setup script
 `./setup.sh`
 
-Follow instructions....
+Follow instructions....you will need to copy and paste your Device Type ID, Security Profile Description, Security Profile ID , Client ID, and Client Secret. If you followed the instructions exactly above, Device Type ID and Security Profile Description would both be 'AlexaPi'. The rest is unique to your device.
 
-Enjoy :)
+After the setup script finished running, you will need to open a browser to http://IPaddressofyourPi:5000
+
+This will take you to the Amazon Developer login scree. Login with your account credentials, and agree that this is your device. Then an authentication token will be displayed in the browser. The setup script automatically takes this token, and appends it to your cred.py file, so you dont need to do anything else. Close the browser.
+
+You can now quit out of the setup with Control + C. You should be able to test the code with `python main.py` and hear Alexa say 'Hello'. Feel free to close the terminal, and shutdown your Pi.
+
+## Circuit Setup
+
+If you only want to use the Wii remote, you can skip this part. For those of you wanting to use a pushbutton on a breadboard, OR wanting the optional LEDS, listen up.
+
+The circuit diagram provided below works as follows:
+-A push button is wired between GND and BCM Pin 18. So a wire goes from GND on the Pi, to a 1k ohm resistor on the bread board. The other leg of the resistor is with the first leg of the push button. The second leg of the pushbutton is wired to Pin 18.
+
+-A red LED has a wire from GND to one leg of a 220ohm resistor. The other leg of the resistor connects to the 1st leg of the LED. The 2nd leg of the LED is wired to BCM PIN 24.
+
+-A green LED has a wire from GND to one leg of a 220ohm resistor. The other leg of the resistor connects to the 1st leg of the LED. The 2nd leg of the LED is wired to BCM PIN 25.
+
+There are 2 types of GPIO readings. BCM and BOARD. BCM uses a specific number, while BOARD uses the actual physical pin number. *This python script uses BCM, so don't use the BOARD layout!* Here is a link to the GPIO on the Raspberry Pi: https://pinout.xyz
+
+# Usage
+
+After you set up everything above, you can finally apply power to your Pi. You should hear Alexa say 'Hello', which means `main.py` is successfully running on reboot. If you decided to wire up the optional LEDs, the red LED will blink 3 times when Alexa is ready to be asked questions.
+
+To connect your Wii remote, hold the 1 and 2 buttons at the same time for a couple seconds, and let go. If it connects successfully, you should see the Player 1 LED light up.
+
+Here is the process if you wired up the optional LEDs. You press a button (pushbutton, or A button on Wii remote) and the green LED turns on. Hold your button, ask your question, and let go of the button. When you let go of the button, the red LED should come on. This lets us know we captured your recording, and it's being sent to Alexa. The green LED should turn off when it's finished processing. Then Alexa will speak her response through the speaker. The red LED will turn off when she is done speaking, and you are free to ask another question.
+
+In case you don't know much about Alexa, here is a good resource for how to talk to her: https://www.amazon.com/gp/help/customer/display.html?nodeId=201549800
 
 ### Issues/Bugs etc.
 
