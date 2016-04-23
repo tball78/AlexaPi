@@ -10,8 +10,10 @@
 This is the code needed to turn a Raspberry Pi into a client for Amazon's Alexa service. I have developed this against the Raspberry Pi 2, but I see no reason why it shouldn't run on the other models. Feedback is welcome! 
 
 There are 2 versions I have built, one with a physical push button on a breadboard, and one using a Wii Remote through bluetooth. Hopefully this is detailed enough to make this project easy enough for intermediate or even beginner level users. The only expertise needed is how to troubleshoot whenever your situation deviates from the happy path that I present to you (where everything just works).
+
+I have also provided 2 ways for feedback from the Alexa Voice Service, either through LEDs wired on a breadboard and connected through the Raspberry Pi's GPIOs, or using the Wii remote player LEDs.
  
-## Material Requirements
+## General Material Requirements
 
 For Both versions:
 
@@ -21,7 +23,6 @@ For Both versions:
 * A USB Sound Dongle and Microphone
 * Power supply for Pi
 * Network connection for Pi (I use a WiFi dongle, although Ethernet can be used instead. Whatever you have available.)
-* (Optionally) 2 single LEDs connected to GPIO 24 & 25 (I use a green LED on BCM PIN 24, and a red LED on BCM PIN 25. Both have 220ohm resistors [Red, Red, Brown, Gold])
 
 For Pushbutton version:
 * A pushbutton connected between BCM PIN 18 and GND (I use a resistor on mine, 1k ohm [Brown, Black, Red, Gold])
@@ -30,6 +31,15 @@ For Pushbutton version:
 For Wii Remote version:
 * Bluetooth dongle (I used a UD100-G03 Bluetooth adapter from Sena, which uses BlueSoleil Bluetooth Software. Literally almost any bluetooth adapter should work, including the built in Raspberry Pi 3 bluetooth [I tried and it works with mine])
 * Wii Remote (I use the original version from 2006. I'm sure it would work exactly the same with the newer "motion plus" versions)
+
+## Feedback Materials:
+
+Breadboard LEDs:
+* 2 single LEDs connected to GPIO 24 & 25 (I use a green LED on BCM PIN 24, and a red LED on BCM PIN 25. Both have 220ohm resistors [Red, Red, Brown, Gold])
+* Breadboard and female to male jumper cables
+
+Wii Remote LEDs:
+* Nothing extra, if you are already using the Wii remote version.
 
 ## Overview
 
@@ -98,6 +108,7 @@ Now install the module you will need to use the Wii Remote: `sudo apt-get instal
 You can test the Wii Remote after you clone the repo, by `cd wii_remote_examples/` and running one of the scripts.
 * `python wii_remote.py` just tests the button presses. Connect by pressing 1 and 2 at the same time.
 * `python wiimote.py` is a little more advanced, but basically works the same. The player 1 LED will light up when you are successfully connected, and you can even view the Wii mote accelerometer data if you hold down the home button.
+* `binary.py` is something I've added that goes through the player LEDs in binary order, after you hit the B button. Hold the Wii remote upside down to count along with it in binary so you can understand what number correlates to which LED if you want to modify this later in the main script.
 
 ## Code Installation
 
@@ -112,7 +123,11 @@ and then
 Clone this repo to the Pi
 `git clone https://github.com/cwalk/AlexaPi.git`
 
-**THE DEFAULT `main.py` USES THE WII REMOTE. IF YOU WANT TO USE THE PUSHBUTTON, RENAME `main.py` to `mainWiiRemote.py` AND RENAME `mainPushButton.py` TO `main.py` INSTEAD.**
+**THE DEFAULT `main.py` USES THE WII REMOTE AND BREADBOARD LEDs. JUST RENAME `main.py` TO WHATEVER, AND RENAME THE FILE WITH THE DESIRED FUNCTIONALITY TO `main.py` INSTEAD. FUNCTIONALITY DEFINED AS FOLLOWS:**
+
+* Current `main.py`: Button through Wii remote, feedback from LEDs on breadboard.
+* `mainPushButton.py`: Button through breadboard, feedback from LEDs on breadboad.
+* `mainWiiLEDs.py`: Button through Wii remote, feedback from LEDs on Wii Remote (Choose this one if you don't want to create a circuit or don't have the materials needed for the other 2).
 
 **If you are using ethernet instead of WiFi, please change line 31 in `setup.sh` to say "ifconfig eth0" instead of "ifconfig wlan0".**
 
@@ -130,7 +145,7 @@ Let the script re-run after it takes in the token. When it looks like it's not d
 
 ## Circuit Setup
 
-If you only want to use the Wii remote, you can skip this part. For those of you wanting to use a pushbutton on a breadboard, OR wanting the optional LEDS, listen up.
+If you only want to use the Wii remote, you can skip this part. For those of you wanting to use a pushbutton on a breadboard, OR wanting the optional breadboard LEDS, listen up.
 
 The circuit diagram provided below works as follows:
 * A push button is wired between GND and BCM PIN 18. So a wire goes from GND on the Pi, to a 1k ohm resistor on the bread board. The other leg of the resistor is with the first leg of the push button. The second leg of the pushbutton is wired to BCM PIN 18.
@@ -149,7 +164,13 @@ After you set up everything above, you can finally apply power to your Pi. You s
 
 To connect your Wii remote, hold the 1 and 2 buttons at the same time for a couple seconds, and let go. If it connects successfully, you should see the Player 1 LED light up.
 
-Here is the process if you wired up the optional LEDs. You press a button (pushbutton, or A button on Wii remote) and the red LED turns on. Hold your button, ask your question, and let go of the button. When you let go of the button, the green LED should come on. This lets us know we captured your recording, and it's being sent to Alexa. The red LED should turn off when it's finished processing. Then Alexa will speak her response through the speaker. The green LED will turn off when she is done speaking, and you are free to ask another question. 
+# Wii Remote LED feedback
+
+Here is the process if you are using the Wii remote LEDs. You press the A button on Wii remote and the player 4 LED turns on. Hold your button, ask your question, and let go of the button. When you let go of the button, the player 3 LED should come on. This lets us know we captured your recording, and it's being sent to Alexa. The player 4 LED should turn off when it's finished processing. Then Alexa will speak her response through the speaker. The player 3 LED will turn off when she is done speaking, and you are free to ask another question. If the client gets an error back from AVS, then the player 4 LED will flash 3 times.
+
+# Breadboard LED feedback
+
+Here is the process if you wired up the optional breadboard LEDs. You press a button (pushbutton, or A button on Wii remote) and the red LED turns on. Hold your button, ask your question, and let go of the button. When you let go of the button, the green LED should come on. This lets us know we captured your recording, and it's being sent to Alexa. The red LED should turn off when it's finished processing. Then Alexa will speak her response through the speaker. The green LED will turn off when she is done speaking, and you are free to ask another question.
 
 If the client gets an error back from AVS, then the Red LED will flash 3 times. This usually means something went wrong (is your pushbutton snug in the breadboard? Mine popped out once or twice during recording, causing this to happen).
 
