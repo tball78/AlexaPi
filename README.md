@@ -4,6 +4,12 @@
  
 * Clayton Walker 
 * Sam Machin
+
+## YouTube
+
+AlexaPi: https://www.youtube.com/watch?v=P-3xpMIlyQg&feature=youtu.be
+
+Count in Binary with Wii Remote LEDs: https://www.youtube.com/watch?v=_sJbWq_rI-g&feature=youtu.be
  
 ## Introduction
  
