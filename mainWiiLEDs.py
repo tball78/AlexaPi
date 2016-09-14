@@ -43,7 +43,7 @@ def gettoken():
         if token:
                 return token
         elif refresh:
-                payload = {"client_id" : Client_ID, "client_secret" : Client_Secret, "refresh_token" : refresh, "grant_type" $
+                payload = {"client_id" : Client_ID, "client_secret" : Client_Secret, "refresh_token" : refresh, "grant_type" : "refresh_token", }
                 url = "https://api.amazon.com/auth/o2/token"
                 r = requests.post(url, data = payload)
                 resp = json.loads(r.text)
